@@ -3,36 +3,40 @@
     
     <div class="container">
         <h1 class="text-center my-4"><%= title  %></h1>
-        <table class="table text-center mt-4">
-            <thead class="table-dark">
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% users.forEach((user, ind) => {%>
-                    <tr class="align-middle">
-                        <th scope="row"><%= ind+1 %> </th>
-                        <td><img src="<%= user.image %>" alt="" style="width:80px; height: 80px;"></td>
-                        <td><%= user.name  %> </td>
-                        <td><%= user.email  %> </td>
-                        <td><%= user.phone  %> </td>
-                        <td>
-                            <i class="fas fa-user-edit fa-lg mx-3 text-success "></i>
-                            <i class="fas fa-trash-alt fa-lg mx-3 text-danger"></i>
-                        </td>
+
+        <% if(users.length == 0) { %> 
+            <h2 class="text-center">Users no found</h2>
+        <% } else { %>
+            <table class="table text-center mt-4" id="myTable">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Action</th>
                     </tr>
-                <%}) %> 
-                <tr>
+                </thead>
+                <tbody>
                     
-                </tr>
-            </tbody>
-        </table>
+                    <% users.forEach((user, ind) => {%>
+                        <tr class="align-middle">
+                            <th scope="row"><%= ind+1 %> </th>
+                            <td><img src="<%= user.image %>" alt="" style="width:80px; height: 80px;"></td>
+                            <td><%= user.name  %> </td>
+                            <td><%= user.email  %> </td>
+                            <td><%= user.phone  %> </td>
+                            <td>
+                                <a href="/edit/<%= user._id %> "><i class="fas fa-user-edit fa-lg mx-3 text-success "></i></a>
+                                <a href="/delete/<%= user._id %>"><i class="fas fa-trash-alt fa-lg mx-3 text-danger"></i></a>
+                                
+                            </td>
+                        </tr>
+                    <%}) %>     
+                </tbody>
+            </table>
+        <% } %>  
     </div>
 </main>
 <%- include('../partials/footer') %> 
